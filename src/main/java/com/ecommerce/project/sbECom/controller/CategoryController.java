@@ -2,6 +2,7 @@ package com.ecommerce.project.sbECom.controller;
 
 
 import com.ecommerce.project.sbECom.model.Category;
+import com.ecommerce.project.sbECom.payload.CategoryDTO;
 import com.ecommerce.project.sbECom.payload.CategoryResponse;
 import com.ecommerce.project.sbECom.service.CategoryService;
 import jakarta.validation.Valid;
@@ -32,9 +33,9 @@ public class CategoryController {
     }
 
     @PostMapping("public/categories")
-    public ResponseEntity<String> createCategory(@Valid @RequestBody Category category){
-        service.createCategory(category);
-        return ResponseEntity.ok("Category created successfully");
+    public ResponseEntity<CategoryDTO> createCategory(@Valid @RequestBody CategoryDTO categoryDTO){
+        CategoryDTO savedcategoryDTO = service.createCategory(categoryDTO);
+        return ResponseEntity.ok(savedcategoryDTO);
     }
 
     @DeleteMapping("admin/categories/{categoryId}")
