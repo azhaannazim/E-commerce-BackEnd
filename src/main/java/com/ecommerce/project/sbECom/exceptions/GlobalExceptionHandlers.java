@@ -35,4 +35,10 @@ public class GlobalExceptionHandlers {
         String message = e.getMessage();
         return new ResponseEntity<>(message , HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(NoCategoriesFoundException.class)
+    public ResponseEntity<String> handleNoCategoriesFoundException(NoCategoriesFoundException e) {
+        String message = e.getMessage();
+        return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+    }
 }

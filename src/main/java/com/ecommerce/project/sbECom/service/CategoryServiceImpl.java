@@ -1,9 +1,11 @@
 package com.ecommerce.project.sbECom.service;
 
 import com.ecommerce.project.sbECom.exceptions.APIException;
+import com.ecommerce.project.sbECom.exceptions.NoCategoriesFoundException;
 import com.ecommerce.project.sbECom.exceptions.ResourceNotFoundException;
 import com.ecommerce.project.sbECom.model.Category;
 import com.ecommerce.project.sbECom.repositories.CategoryRepository;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,9 +22,16 @@ public class CategoryServiceImpl implements CategoryService{
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @NotNull
     @Override
     public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+        List<Category> list = categoryRepository.findAll();
+
+        if(list.isEmpty()){
+            throw new NoCategoriesFoundException("No category found in the repository");
+            //throw new APIException("No category found in the repository");
+        }
+        else return list;
     }
     @Override
     public void createCategory(Category category) {
