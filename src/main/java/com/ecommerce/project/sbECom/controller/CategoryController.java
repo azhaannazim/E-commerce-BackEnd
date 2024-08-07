@@ -2,6 +2,7 @@ package com.ecommerce.project.sbECom.controller;
 
 
 import com.ecommerce.project.sbECom.model.Category;
+import com.ecommerce.project.sbECom.payload.CategoryResponse;
 import com.ecommerce.project.sbECom.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class CategoryController {
     @GetMapping("public/categories")
     //@RequestMapping(value = "api/public/categories" , method = RequestMethod.GET)
     //it can be used universally
-    public ResponseEntity<List<Category>> getAllCategories(){
+    public ResponseEntity<CategoryResponse> getAllCategories(){
         return new ResponseEntity<>(service.getAllCategories() , HttpStatus.OK);
     }
 
