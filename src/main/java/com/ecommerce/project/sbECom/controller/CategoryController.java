@@ -24,16 +24,14 @@ public class CategoryController {
 //    public CategoryController(CategoryService service) { // constructor injection
 //        this.service = service;
 //    }
-    @GetMapping("/echo")
-    public ResponseEntity<String> echoMessage(@RequestParam(name = "message" , defaultValue = "hi world") String message){
-        return new ResponseEntity<>("Echoed message : " + message , HttpStatus.OK);
-    }
 
     @GetMapping("public/categories")
     //@RequestMapping(value = "api/public/categories" , method = RequestMethod.GET)
     //it can be used universally
-    public ResponseEntity<CategoryResponse> getAllCategories(){
-        return new ResponseEntity<>(service.getAllCategories() , HttpStatus.OK);
+    public ResponseEntity<CategoryResponse> getAllCategories(
+            @RequestParam(name = "pageNumber") Integer pageNumber,
+            @RequestParam(name = "pageSize") Integer pageSize){
+        return new ResponseEntity<>(service.getAllCategories(pageNumber , pageSize) , HttpStatus.OK);
     }
 
     @PostMapping("public/categories")
