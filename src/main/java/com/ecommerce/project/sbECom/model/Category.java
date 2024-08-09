@@ -19,7 +19,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoryId;
 
-    @NotBlank
-    @Size(min = 5, message = "category Name must contains at least 5 characters")
+//    @NotBlank
+//    @Size(min = 5, message = "category Name must contains at least 5 characters")
     private String categoryName;
 }
