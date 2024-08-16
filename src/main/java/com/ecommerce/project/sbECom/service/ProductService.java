@@ -10,4 +10,8 @@ public interface ProductService {
     ProductResponse getAllProducts();
 
     ProductResponse getProductsByCategory(Long id);
+
+    ProductResponse getProductsByKeyword(String keyword);
+
+    ProductDTO updateProduct(Long productId ,Product product);
 }
