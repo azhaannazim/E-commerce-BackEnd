@@ -1,4 +1,4 @@
-package com.ecommerce.project.sbECom.security.service;
+package com.ecommerce.project.sbECom.security.services;
 import com.ecommerce.project.sbECom.model.User;
 import com.ecommerce.project.sbECom.repositories.UserRepository;
 import jakarta.transaction.Transactional;
