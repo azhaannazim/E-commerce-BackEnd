@@ -53,8 +53,10 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request,response); //you can continue the filter chain
     }
+
     private String parseJwt(HttpServletRequest request){
-        String jwt = jwtUtils.getJwtFromHeader(request);
+        //String jwt = jwtUtils.getJwtFromHeader(request); //auth using bearer token
+        String jwt = jwtUtils.getJwtFromCookies(request); //auth using cookie
         logger.debug("AuthFilter.java : {}" , jwt);
         return jwt;
     }
