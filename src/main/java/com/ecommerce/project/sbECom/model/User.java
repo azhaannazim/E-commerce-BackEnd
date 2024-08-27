@@ -71,4 +71,8 @@ public class User {
                 cascade = {CascadeType.PERSIST ,CascadeType.MERGE},
                 orphanRemoval = true) // if seller is removed then his/her products are also
     private Set<Product> products;
+
+    @ToString.Exclude
+    @OneToOne(mappedBy = "user" ,cascade = {CascadeType.PERSIST ,CascadeType.MERGE} ,orphanRemoval = true)
+    private Cart cart;
 }

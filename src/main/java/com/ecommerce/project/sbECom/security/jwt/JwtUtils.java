@@ -60,6 +60,12 @@ public class JwtUtils {
                                                 .build();
         return cookie;
     }
+    public ResponseCookie getCleanJwtCookie(){
+        ResponseCookie cookie = ResponseCookie.from(jwtCookie , null)
+                .path("/api")
+                .build();
+        return cookie;
+    }
 
     //auth using bearer token
 //    public String generateTokenFromUserName(UserDetails userDetails){
