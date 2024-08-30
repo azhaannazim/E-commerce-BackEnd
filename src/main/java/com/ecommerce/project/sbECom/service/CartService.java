@@ -16,5 +16,8 @@ public interface CartService {
     @Transactional //atomicity
     CartDTO updateProductQuantityInCart(Long productId, Integer quantity);
 
+    @Transactional
     String deleteProductFromCart(Long cartId, Long productId);
+
+    void updateProductInCarts(Long cartId, Long productId);
 }
