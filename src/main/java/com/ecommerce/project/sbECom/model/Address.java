@@ -39,6 +39,10 @@ public class Address {
     private String state;
 
     @NotBlank
+    @Size(min = 2, message = "country name should be atleast 5 digits")
+    private String country;
+
+    @NotBlank
     @Size(min = 5, message = "building name should be atleast 5 digits")
     private String pincode;
 
