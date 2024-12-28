@@ -67,13 +67,13 @@ public class CartServiceImpl implements CartService{
 
         CartDTO cartDTO = modelMapper.map(cart ,CartDTO.class);
         List<CartItem> cartItems = cart.getCartItems();
-        Stream<ProductDTO> productDTOStream = cartItems.stream()
+        Stream<ProductDTO> productsStream = cartItems.stream()
                 .map(item ->{
                     ProductDTO map = modelMapper.map(item.getProduct() ,ProductDTO.class);
                     map.setQuantity(item.getQuantity());
                     return map;
                 });
-        cartDTO.setProductDTOS(productDTOStream.toList());
+        cartDTO.setProducts(productsStream.toList());
         return cartDTO;
     }
 
@@ -88,10 +88,10 @@ public class CartServiceImpl implements CartService{
         List<CartDTO> cartDTOS = carts.stream()
                 .map(cart -> {
                     CartDTO cartDTO = modelMapper.map(cart ,CartDTO.class);
-                    List<ProductDTO> productDTOS = cart.getCartItems().stream() ///////////
+                    List<ProductDTO> products = cart.getCartItems().stream() ///////////
                             .map(p -> modelMapper.map(p.getProduct() ,ProductDTO.class))
                             .toList();
-                    cartDTO.setProductDTOS(productDTOS);
+                    cartDTO.setProducts(products);
                     return cartDTO;
                 }).toList();
 
@@ -108,7 +108,7 @@ public class CartServiceImpl implements CartService{
         cart.getCartItems().forEach(c -> c.getProduct().setQuantity(c.getQuantity()));
         List<ProductDTO> productDTOS = cart.getCartItems().stream()
                 .map(p -> modelMapper.map(p.getProduct() ,ProductDTO.class)).toList();
-        cartDTO.setProductDTOS(productDTOS);
+        cartDTO.setProducts(productDTOS);
         return cartDTO;
     }
 
@@ -164,14 +164,14 @@ public class CartServiceImpl implements CartService{
 
         List<CartItem> cartItems = cart.getCartItems();
 
-        Stream<ProductDTO> productStream = cartItems.stream().map(item -> {
+        Stream<ProductDTO> productsStream = cartItems.stream().map(item -> {
             ProductDTO prd = modelMapper.map(item.getProduct(), ProductDTO.class);
             prd.setQuantity(item.getQuantity());
             return prd;
         });
 
 
-        cartDTO.setProductDTOS(productStream.toList());
+        cartDTO.setProducts(productsStream.toList());
 
         return cartDTO;
     }

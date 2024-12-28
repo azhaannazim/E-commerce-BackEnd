@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "cart")
+@Table(name = "carts")
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +26,5 @@ public class Cart {
                                                 ,orphanRemoval = true)
     private List<CartItem> cartItems = new ArrayList<>();
 
-    private Double totalPrice;
+    private Double totalPrice = 0.0;
 }

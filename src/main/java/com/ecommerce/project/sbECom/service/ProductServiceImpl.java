@@ -175,7 +175,7 @@ public class ProductServiceImpl implements ProductService {
             List<ProductDTO> productDTOS = cart.getCartItems().stream()
                     .map(p -> modelMapper.map(p.getProduct(), ProductDTO.class)).collect(Collectors.toList());
 
-            cartDTO.setProductDTOS(productDTOS);
+            cartDTO.setProducts(productDTOS);
 
             return cartDTO;
 
