@@ -28,6 +28,7 @@ public class Product {
     private String image;
     @NotBlank
     @Size(min = 5, message = "category Name must contains at least 5 characters")
+    @Column(name = "description", length = 1000)
     private String description;
     private Integer quantity;
     private double price;
