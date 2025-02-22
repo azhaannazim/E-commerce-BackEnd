@@ -89,7 +89,7 @@ public class ProductServiceImpl implements ProductService {
         List<Product> productList = productsPage.getContent();
 
         if(productList.isEmpty()){
-            throw new APIException("No product found in the repo");
+            throw new APIException("No product found");
         }
 
         List<ProductDTO> productDTOS = productList.stream()
@@ -235,4 +235,32 @@ public class ProductServiceImpl implements ProductService {
         Product updatedProduct = productRepository.save(product);
         return modelMapper.map(updatedProduct , ProductDTO.class);
     }
+
+    @Override
+    public void registerProductReturn(Long productId) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product","productId",productId));
+        product.incrementReturnsCount();
+        productRepository.save(product);
+    }
+
+    @Override
+    public void addRating(Long productId, int rating) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product", "productId", productId));
+
+        int ratingCount = product.getRatings(); // Existing rating count
+        double totalRating = product.getAverageRating() * ratingCount;
+
+        product.setRatings(ratingCount + 1);
+
+        if (ratingCount == 0) {
+            product.setAverageRating(rating); // First rating is the actual rating
+        } else {
+            product.setAverageRating((totalRating + rating) / (ratingCount + 1));
+        }
+
+        productRepository.save(product);
+    }
+
 }

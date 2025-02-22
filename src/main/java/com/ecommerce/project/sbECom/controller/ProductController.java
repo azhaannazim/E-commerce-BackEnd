@@ -1,6 +1,7 @@
 package com.ecommerce.project.sbECom.controller;
 
 import com.ecommerce.project.sbECom.config.AppConstants;
+import com.ecommerce.project.sbECom.payload.CartItemDTO;
 import com.ecommerce.project.sbECom.payload.ProductDTO;
 import com.ecommerce.project.sbECom.payload.ProductResponse;
 import com.ecommerce.project.sbECom.service.ProductService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -77,5 +79,20 @@ public class ProductController {
                                                          @RequestParam("image")MultipartFile image) throws IOException {
         ProductDTO productDTO = productService.updateProductImage(productId , image);
         return new ResponseEntity<>(productDTO , HttpStatus.OK);
+    }
+
+    @PostMapping("/public/products/{productId}/return")
+    public ResponseEntity<String> returnProduct(@PathVariable Long productId) {
+        productService.registerProductReturn(productId);
+        return ResponseEntity.ok("Product return registered successfully.");
+    }
+
+    @PostMapping("/public/products/{productId}/rate")
+    public ResponseEntity<String> addRating(@PathVariable Long productId, @RequestParam int rating) {
+        if (rating < 1 || rating > 5) {
+            return ResponseEntity.badRequest().body("Rating must be between 1 and 5!");
+        }
+        productService.addRating(productId, rating);
+        return ResponseEntity.ok("Rating added successfully!");
     }
 }

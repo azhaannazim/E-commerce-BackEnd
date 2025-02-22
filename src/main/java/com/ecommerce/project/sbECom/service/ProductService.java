@@ -20,4 +20,8 @@ public interface ProductService {
     ProductDTO deleteProduct(Long productId);
 
     ProductDTO updateProductImage(Long productId, MultipartFile image) throws IOException;
+
+    void registerProductReturn(Long productId);
+
+    void addRating(Long productId, int rating);
 }

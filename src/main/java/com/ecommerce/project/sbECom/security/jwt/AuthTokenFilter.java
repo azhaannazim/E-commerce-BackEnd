@@ -17,6 +17,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+//filters incoming requests to check for a valid JWT in the header, setting the authentication context if the token is valid.
 @Component
 public class AuthTokenFilter extends OncePerRequestFilter {
     @Autowired

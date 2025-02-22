@@ -1,6 +1,8 @@
 package com.ecommerce.project.sbECom.controller;
 
 import com.ecommerce.project.sbECom.payload.CartDTO;
+import com.ecommerce.project.sbECom.payload.CartItemDTO;
+import com.ecommerce.project.sbECom.payload.ProductDTO;
 import com.ecommerce.project.sbECom.repositories.CartRepository;
 import com.ecommerce.project.sbECom.service.CartService;
 import com.ecommerce.project.sbECom.util.AuthUtil;
@@ -21,6 +23,12 @@ public class CartController {
     @Autowired
     private CartRepository cartRepository;
 
+    @PostMapping("/cart/create")
+    public ResponseEntity<String> createOrUpdateCart(@RequestBody List<CartItemDTO> cartItems){
+        String response = cartService.createOrUpdateCartWithItems(cartItems);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
     @PostMapping("/carts/products/{productId}/quantity/{quantity}")
     private ResponseEntity<CartDTO> addProductToCart(@PathVariable Long productId, @PathVariable Integer quantity){
         CartDTO cartDTO = cartService.addProductToCart(productId ,quantity);
@@ -31,7 +39,7 @@ public class CartController {
         List<CartDTO> cartDTOS = cartService.getAllCarts();
         return new ResponseEntity<>(cartDTOS ,HttpStatus.FOUND);
     }
-    @GetMapping("/carts/user/cart")
+    @GetMapping("/carts/users/cart")
     private ResponseEntity<?> getCartById(){
         String email = authUtil.loggedInEmail();
         Long cartId = cartRepository.findCartByEmail(email).getCartId();

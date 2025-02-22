@@ -46,4 +46,18 @@ public class Product {
     @OneToMany(mappedBy = "product" ,cascade = {CascadeType.MERGE ,CascadeType.PERSIST} ,fetch = FetchType.EAGER)
     private List<CartItem> products = new ArrayList<>();
 
+    @Column(name = "returns", nullable = false)
+    private int returns = 0;
+
+    public void incrementReturnsCount() {
+        this.returns++;
+    }
+
+    private double averageRating = 0.0;
+    private int ratings = 0;
+
+    public void incrementRatingCount() {
+        this.ratings++;
+    }
+
 }

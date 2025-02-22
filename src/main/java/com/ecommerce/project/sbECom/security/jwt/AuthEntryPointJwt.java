@@ -15,9 +15,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+//provides custom handling for unauthorized requests, logs the error, and returns a JSON response with an error message.
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
     private static final Logger logger = LoggerFactory.getLogger(AuthEntryPointJwt.class);
+
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
             throws IOException, ServletException {

@@ -21,7 +21,7 @@ import javax.crypto.SecretKey;
 import java.security.Key;
 import java.util.Date;
 
-
+//contains utility methods for generating, parsing, and validating JWTs.
 @Component
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
@@ -57,6 +57,7 @@ public class JwtUtils {
                                                 .path("/api")
                                                 .maxAge(24*60*60)
                                                 .httpOnly(false)
+                .secure(false)
                                                 .build();
         return cookie;
     }
